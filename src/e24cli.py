@@ -1,23 +1,28 @@
 import boto3
-client = boto3.client('ec2',endpoint_url='https://eu-poland-1poznan.api.e24cloud.com')
+import argparse
+import commands
+import func
+ec2 = None
 
-f = open('out.txt','w')
-#response =client.describe_images()
-
-#for inst in response['Images']:
-#    print(str(inst))
-
-#response =client.describe_instances()
-#print(response)
-#for inst in response['Images']:
-#    print(str(inst))
-
-
-response = client.describe_instance_attribute(
-    Attribute='instanceType',
-    DryRun=True,
-    InstanceId='34ba1395-c2fd-4a07-ac7a-4cc554509ce5'
-)
-print(response)
-
-print('end')
+cmds = commands.get_commands() 
+while True:
+   # func.print_ec2()
+    args = input(">")
+    args_list = args.split()
+    if(len(args_list) < 1):
+        print("Incorect command")
+        continue
+    if(args_list[0]=="exit"):
+        quit()
+    if(args_list[0] not in cmds.keys()):
+        print("Incorect command:{0}".format(cmds.keys()))
+        continue
+    cmd = cmds.get(args_list[0])
+    cmd_func = cmd[1]
+    parser = cmd[0]
+    try:
+        parse_args = parser.parse_args(args_list[1:])
+    except SystemExit:
+        continue
+    cmd_func(parse_args)
+   
