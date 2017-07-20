@@ -51,7 +51,7 @@ def create_instance(pattern):
     image_id = pattern.image_id[0]
     instance_type = pattern.instance_type[0]
     ins = cfg.ec2.create_instances(ImageId=image_id, MinCount =  1, MaxCount = 1, InstanceType=instance_type)#m1.small
-    print("Instance: Id: {0} state: {1} type:{2}  image id:{3}".format(ins.id, ins.state, ins.instance_type, ins.image_id))
+   # print("Instance: Id: {0} state: {1} type:{2}  image id:{3}".format(ins.id, ins.state, ins.instance_type, ins.image_id))
 
 # def create_intsace():
 #     response = ec2.create_instances(ImageId = 'ami-000001c6',  MinCount =  1, MaxCount = 1)    
