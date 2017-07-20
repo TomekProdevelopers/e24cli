@@ -24,5 +24,12 @@ while True:
         parse_args = parser.parse_args(args_list[1:])
     except SystemExit:
         continue
-    cmd_func(parse_args)
+    try:
+        cmd_func(parse_args)
+    except Exception as e:
+        print("Error calling API:")
+        print(e)
+
+
+
    

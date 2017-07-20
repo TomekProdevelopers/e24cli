@@ -10,7 +10,10 @@ import argparse
 cmd_def= {"set_profile": [{"profile":{'nargs': 1, 'type':str, 'choices':['e24','aws'] }} , func.set_default_profile] }
 cmd_def["get_images"] = [{"filter":{'nargs':'?','type':str}} , func.get_images_list] 
 cmd_def["get_instances"] = [{"filter":{'nargs':'?','type':str}} , func.get_instances_list] 
-cmd_def["create_instance"] = [{"image_id":{'nargs':1,'type':str},"instance_type":{'nargs':1,'type':str}  } , func.create_instance] 
+cmd_def["create_instance"] = [{"image_id":{'nargs':1,'type':str},"instance_type":{'nargs':1,'type':str}  } , func.create_instance]
+cmd_def["terminate"] = [{"id":{'nargs':1,'type':str}} , func.terminate_instance]
+cmd_def["start"] = [{"id":{'nargs':1,'type':str}} , func.start_instance]
+cmd_def["stop"] = [{"id":{'nargs':1,'type':str}} , func.stop_instance]
 
 
 def get_commands():

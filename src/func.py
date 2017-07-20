@@ -50,16 +50,24 @@ def get_instances_list(pattern):
 def create_instance(pattern):
     image_id = pattern.image_id[0]
     instance_type = pattern.instance_type[0]
-    ins = cfg.ec2.create_instances(ImageId=image_id, MinCount =  1, MaxCount = 1, InstanceType=instance_type)#m1.small
-   # print("Instance: Id: {0} state: {1} type:{2}  image id:{3}".format(ins.id, ins.state, ins.instance_type, ins.image_id))
+    instances = cfg.ec2.create_instances(ImageId=image_id, MinCount =  1, MaxCount = 1, InstanceType=instance_type)#m1.small
+    for ins in instances:
+        print("Instance: Id: {0} state: {1} type:{2}  image id:{3}".format(ins.id, ins.state, ins.instance_type, ins.image_id))
 
-# def create_intsace():
-#     response = ec2.create_instances(ImageId = 'ami-000001c6',  MinCount =  1, MaxCount = 1)    
+def terminate_instance(pattern):
+    id=pattern.id[0]
+    ints = cfg.ec2.Instance(id)
+    ints.terminate()
+    print("Instance has been terminated: Id: {0} state: {1} type:{2}  image id:{3}".format(ints.id, ints.state, ints.instance_type,ints.image_id))
 
-# def get_instances_list():
-#     intsances = ec2.instances.filter()
-#     for ins in intsances:
-#         print("Id: {0} state: {1}".format(ins.id, ins.state))
-# def terminate_instance(id):
-#     ints = ec2.Instance(id)
-#     ints.terminate()
+def stop_instance(pattern):
+    id=pattern.id[0]
+    ints = cfg.ec2.Instance(id)
+    ints.stop()
+    print("Instance has been stoped: Id: {0} state: {1} type:{2}  image id:{3}".format(ints.id, ints.state, ints.instance_type,ints.image_id))
+
+def start_instance(pattern):
+    id=pattern.id[0]
+    ints = cfg.ec2.Instance(id)
+    ints.start()
+    print("Instance has been started: Id: {0} state: {1} type:{2}  image id:{3}".format(ints.id, ints.state, ints.instance_type,ints.image_id))
